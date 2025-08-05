@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  # MongoDB database
+  mongo:
+    image: mongo:7.0
+    container_name: private-messaging-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: private-messaging
+    volumes:
+      - mongo_data:/data/db
+      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - private-messaging-network
+
+  # Redis for session storage and caching
+  redis:
+    image: redis:7.2-alpine
+    container_name: private-messaging-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - private-messaging-network
+
+  # Coturn TURN/STUN server for WebRTC
+  coturn:
+    image: coturn/coturn:latest
+    container_name: private-messaging-coturn
+    restart: unless-stopped
+    ports:
+      - "3478:3478/udp"
+      - "3478:3478/tcp"
+      - "65435-65535:65435-65535/udp"
+    environment:
+      - TURN_USERNAME=testuser
+      - TURN_PASSWORD=testpass
+    command: |
+      -n
+      --log-file=stdout
+      --min-port=65435
+      --max-port=65535
+      --fingerprint
+      --no-multicast-peers
+      --no-cli
+      --no-tlsv1
+      --no-tlsv1_1
+      --realm=private-messaging.local
+      --server-name=private-messaging.local
+      --static-auth-secret=mysecret
+      --user=testuser:testpass
+      --lt-cred-mech
+    networks:
+      - private-messaging-network
+
+  # Development socket server (for testing)
+  dev-socket:
+    image: node:18-alpine
+    container_name: private-messaging-dev-socket
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    working_dir: /app
+    volumes:
+      - ./dev-tools/socket-server:/app
+    command: sh -c "npm install && npm start"
+    environment:
+      - NODE_ENV=development
+      - PORT=4000
+    networks:
+      - private-messaging-network
+    depends_on:
+      - mongo
+      - redis
+
+  # MongoDB Express (Database admin interface)
+  mongo-express:
+    image: mongo-express:latest
+    container_name: private-messaging-mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+    networks:
+      - private-messaging-network
+    depends_on:
+      - mongo
+
+networks:
+  private-messaging-network:
+    driver: bridge
+
+volumes:
+  mongo_data:
+  redis_data:

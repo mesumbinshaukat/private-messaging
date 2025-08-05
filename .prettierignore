@@ -1,0 +1,27 @@
+# Dependencies
+node_modules
+.pnp.js
+
+# Production builds
+dist
+build
+.next
+out
+
+# Generated files
+coverage
+*.generated.*
+public/sw.js
+public/workbox-*.js
+
+# Package files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Nx
+.nx
+
+# Other
+*.min.js
+*.min.css

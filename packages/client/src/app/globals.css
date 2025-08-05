@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply h-full;
+  }
+  
+  body {
+    @apply h-full bg-base-100 text-base-content antialiased;
+  }
+}
+
+@layer components {
+  /* Admin Panel Custom Components */
+  .admin-card {
+    @apply bg-base-200 rounded-lg shadow-lg border border-base-300 p-6 hover:shadow-xl transition-shadow duration-300;
+  }
+  
+  .admin-card-header {
+    @apply flex items-center justify-between mb-4 pb-2 border-b border-base-300;
+  }
+  
+  .admin-card-title {
+    @apply text-lg font-semibold text-primary flex items-center gap-2;
+  }
+  
+  .admin-stat-card {
+    @apply bg-gradient-to-br from-base-200 to-base-300 rounded-lg p-6 border border-base-300 hover:border-primary transition-colors duration-300;
+  }
+  
+  .admin-btn-primary {
+    @apply btn btn-primary bg-primary hover:bg-primary-focus border-primary hover:border-primary-focus text-primary-content font-medium;
+  }
+  
+  .admin-btn-secondary {
+    @apply btn btn-secondary bg-secondary hover:bg-secondary-focus border-secondary hover:border-secondary-focus text-secondary-content;
+  }
+  
+  .admin-btn-danger {
+    @apply btn btn-error bg-error hover:bg-red-600 border-error hover:border-red-600 text-white;
+  }
+  
+  .admin-btn-success {
+    @apply btn btn-success bg-success hover:bg-green-600 border-success hover:border-green-600 text-white;
+  }
+  
+  .admin-input {
+    @apply input input-bordered bg-base-100 border-base-300 focus:border-primary focus:outline-none;
+  }
+  
+  .admin-select {
+    @apply select select-bordered bg-base-100 border-base-300 focus:border-primary focus:outline-none;
+  }
+  
+  .admin-textarea {
+    @apply textarea textarea-bordered bg-base-100 border-base-300 focus:border-primary focus:outline-none resize-none;
+  }
+  
+  .admin-badge {
+    @apply badge badge-primary bg-primary text-primary-content;
+  }
+  
+  .admin-badge-success {
+    @apply badge badge-success bg-success text-white;
+  }
+  
+  .admin-badge-warning {
+    @apply badge badge-warning bg-warning text-black;
+  }
+  
+  .admin-badge-error {
+    @apply badge badge-error bg-error text-white;
+  }
+  
+  .admin-table {
+    @apply table table-zebra w-full bg-base-100;
+  }
+  
+  .admin-table th {
+    @apply bg-base-200 text-base-content font-semibold;
+  }
+  
+  .admin-table tr:hover {
+    @apply bg-base-200;
+  }
+  
+  .admin-modal {
+    @apply modal modal-open;
+  }
+  
+  .admin-modal-box {
+    @apply modal-box bg-base-200 border border-base-300;
+  }
+  
+  .admin-drawer-side {
+    @apply drawer-side bg-base-200 border-r border-base-300;
+  }
+  
+  .admin-menu {
+    @apply menu p-4 w-64 min-h-full bg-base-200 text-base-content;
+  }
+  
+  .admin-menu-item {
+    @apply hover:bg-base-300 rounded-lg transition-colors duration-200;
+  }
+  
+  .admin-menu-item.active {
+    @apply bg-primary text-primary-content font-medium;
+  }
+  
+  .admin-loading {
+    @apply loading loading-spinner loading-lg text-primary;
+  }
+  
+  .admin-alert {
+    @apply alert rounded-lg shadow-md;
+  }
+  
+  .admin-alert-info {
+    @apply alert-info bg-info text-white;
+  }
+  
+  .admin-alert-success {
+    @apply alert-success bg-success text-white;
+  }
+  
+  .admin-alert-warning {
+    @apply alert-warning bg-warning text-black;
+  }
+  
+  .admin-alert-error {
+    @apply alert-error bg-error text-white;
+  }
+  
+  .admin-tooltip {
+    @apply tooltip tooltip-primary;
+  }
+  
+  .admin-divider {
+    @apply divider text-base-content/60;
+  }
+  
+  .admin-gradient-text {
+    @apply bg-gradient-to-r from-primary to-admin-light-gold bg-clip-text text-transparent;
+  }
+  
+  .admin-glow-effect {
+    @apply shadow-lg shadow-primary/25;
+  }
+  
+  .admin-hover-lift {
+    @apply hover:-translate-y-1 transition-transform duration-200;
+  }
+  
+  /* Custom scrollbars */
+  .admin-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #D4AF37 #374151;
+  }
+  
+  .admin-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .admin-scrollbar::-webkit-scrollbar-track {
+    @apply bg-base-300 rounded;
+  }
+  
+  .admin-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded hover:bg-primary-focus;
+  }
+  
+  /* Chart containers */
+  .admin-chart-container {
+    @apply relative w-full h-64 sm:h-80 bg-base-100 rounded-lg p-4 border border-base-300;
+  }
+  
+  /* Data table styles */
+  .admin-data-table {
+    @apply overflow-x-auto admin-scrollbar;
+  }
+  
+  .admin-data-table table {
+    @apply table table-pin-rows table-pin-cols;
+  }
+  
+  /* Status indicators */
+  .status-online {
+    @apply w-3 h-3 bg-success rounded-full animate-pulse;
+  }
+  
+  .status-offline {
+    @apply w-3 h-3 bg-base-300 rounded-full;
+  }
+  
+  .status-away {
+    @apply w-3 h-3 bg-warning rounded-full;
+  }
+  
+  .status-busy {
+    @apply w-3 h-3 bg-error rounded-full;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(17, 24, 39, 0.8);
+  }
+  
+  .admin-gradient-bg {
+    background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+  }
+  
+  .gold-gradient {
+    background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+  }
+}
