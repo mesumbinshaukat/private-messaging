@@ -161,6 +161,9 @@ importers:
       next-pwa:
         specifier: ^5.6.0
         version: 5.6.0(@babel/core@7.28.0)(next@14.2.31)(webpack@5.101.0)
+      playwright:
+        specifier: ^1.54.2
+        version: 1.54.2
       postcss:
         specifier: ^8.4.32
         version: 8.5.6
@@ -321,6 +324,9 @@ importers:
       node-turn:
         specifier: ^0.0.6
         version: 0.0.6
+      playwright:
+        specifier: ^1.54.2
+        version: 1.54.2
       redis:
         specifier: ^4.6.10
         version: 4.7.1
@@ -403,6 +409,9 @@ importers:
       libsodium-wrappers:
         specifier: ^0.7.13
         version: 0.7.15
+      playwright:
+        specifier: ^1.54.2
+        version: 1.54.2
       zod:
         specifier: ^3.22.4
         version: 3.25.76
@@ -9586,6 +9595,14 @@ packages:
   /fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
 
+  /fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -13050,6 +13067,22 @@ packages:
       mlly: 1.7.4
       pathe: 2.0.3
     dev: true
+
+  /playwright-core@1.54.2:
+    resolution: {integrity: sha512-n5r4HFbMmWsB4twG7tJLDN9gmBUeSPcsBZiWSE4DnYz9mJMAFqr2ID7+eGC9kpEnxExJ1epttwR59LEWCk8mtA==}
+    engines: {node: '>=18'}
+    hasBin: true
+    dev: false
+
+  /playwright@1.54.2:
+    resolution: {integrity: sha512-Hu/BMoA1NAdRUuulyvQC0pEqZ4vQbGfn8f7wPXcnqQmM+zct9UliKxsIkLNmz/ku7LElUNqmaiv1TG/aL5ACsw==}
+    engines: {node: '>=18'}
+    hasBin: true
+    dependencies:
+      playwright-core: 1.54.2
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: false
 
   /portfinder@1.0.37:
     resolution: {integrity: sha512-yuGIEjDAYnnOex9ddMnKZEMFE0CcGo6zbfzDklkmT1m5z734ss6JMzN9rNB3+RR7iS+F10D4/BVIaXOyh8PQKw==}

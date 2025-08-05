@@ -8,12 +8,15 @@
   "scripts": {
     "build": "nx build shared",
     "test": "jest",
+    "test:e2e": "playwright test",
+    "test:e2e:open": "playwright open",
     "lint": "eslint src --ext .ts,.tsx",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "crypto-js": "^4.2.0",
     "libsodium-wrappers": "^0.7.13",
+    "playwright": "^1.54.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {
